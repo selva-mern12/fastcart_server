@@ -146,15 +146,17 @@ app.get('/api/categories', Authentication, async (req, res) => {
 });
   
 // Add Category (with Authentication)
-app.post('/api/categories', Authentication, upload.single("image"), async (req, res) => {
+app.post('/api/categories', upload.single("image"), async (req, res) => {
     try {
-      const { category_name, item_count } = req.body;
-      const user_id = req.user_id; 
+      // const { category_name, item_count } = req.body;
+      // const user_id = req.user_id; 
+        const category_name = "resume";
+        const item_count = 1
   
       // Validate required fields
-      if (!category_name || !item_count) {
-        return res.status(400).json({ message: 'Category name and item count are required' });
-      }
+      // if (!category_name || !item_count) {
+      //   return res.status(400).json({ message: 'Category name and item count are required' });
+      // }
   
       // Check for either file upload or image URL
       if (!req.file && !req.body.image_url) {
@@ -200,6 +202,7 @@ app.post('/api/categories', Authentication, upload.single("image"), async (req, 
       res.status(201).json({ 
         success: true,
         message: 'Category created successfully',
+          image_url
         category: newCategory
       });
       
